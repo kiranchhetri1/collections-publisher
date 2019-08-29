@@ -119,6 +119,22 @@ RSpec.describe StepByStepPage do
 
       expect(step_by_step_page.errors.full_messages).to eq(["Slug has already been taken."])
     end
+
+    describe '#state' do
+      it 'must have a state' do
+        step_by_step_page.state = ''
+
+        expect(step_by_step_page).not_to be_valid
+        expect(step_by_step_page.errors).to have_key(:state)
+      end
+
+      it 'must have a valid state' do
+        step_by_step_page.state = 'foo'
+
+        expect(step_by_step_page).not_to be_valid
+        expect(step_by_step_page.errors).to have_key(:state)
+      end
+    end
   end
 
   describe 'steps association' do

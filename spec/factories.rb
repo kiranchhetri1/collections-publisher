@@ -10,6 +10,7 @@ FactoryBot.define do
     content_id { SecureRandom.uuid }
     introduction { "Find out the steps to become amazing" }
     description { "How to be amazing - find out the steps to become amazing" }
+    state { "draft" }
 
     factory :step_by_step_page_with_steps do
       after(:create) do |step_by_step_page|
@@ -22,6 +23,7 @@ FactoryBot.define do
   factory :published_step_by_step_page, parent: :step_by_step_page_with_steps do
     draft_updated_at { 3.hours.ago }
     published_at { 3.hours.ago }
+    state { "published" }
   end
 
   factory :draft_step_by_step_page, parent: :step_by_step_page_with_steps do
@@ -31,6 +33,7 @@ FactoryBot.define do
   factory :scheduled_step_by_step_page, parent: :step_by_step_page_with_steps do
     draft_updated_at { 3.hours.ago }
     scheduled_at { 3.hours.from_now }
+    state { "scheduled" }
   end
 
   factory :step_by_step_page_with_navigation_rules, parent: :step_by_step_page_with_steps do

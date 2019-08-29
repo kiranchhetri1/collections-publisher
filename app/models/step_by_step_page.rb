@@ -8,6 +8,11 @@ class StepByStepPage < ApplicationRecord
   validates :scheduled_at, in_future: true
   validates :slug, format: { with: /\A([a-z0-9]+-)*[a-z0-9]+\z/ }, uniqueness: true
   validates :slug, slug: true, on: :create
+  validates :state, inclusion: {
+    in: %w(draft published scheduled),
+    message: "%{value} is not a valid state"
+  }
+
   before_validation :generate_content_id, on: :create
   before_destroy :discard_notes
 
